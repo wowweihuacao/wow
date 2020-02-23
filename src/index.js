@@ -2,6 +2,8 @@ import $ from 'jquery'
 import './css/index.css'
 import './css/index.less'
 import './css/index.scss'
+import Vue from 'vue'
+import App from './components/App.vue'
 
 
 
@@ -16,3 +18,8 @@ class Person {
 }
 
 console.log(Person.info)
+
+const vim = new Vue({
+    el: '#app',
+    render: h => h(App)
+})

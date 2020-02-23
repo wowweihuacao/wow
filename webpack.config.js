@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const htmlPlugin = new HtmlPlugin({
     //指定要用到的模板
     template: './src/index.html',
@@ -14,7 +15,7 @@ module.exports = {
         path: path.join(__dirname, './dist'),
         filename: 'bundle.js'
     },
-    plugins: [htmlPlugin],
+    plugins: [htmlPlugin, new VueLoaderPlugin()],
     module: {
         rules: [
             { test: /\.css$/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
@@ -24,7 +25,8 @@ module.exports = {
                 test: /\.(jpg|png|gif|jpeg|bmp|ttf|eot|svg|woff|woff2)$/,
                 use: 'url-loader?limit=10000'
             },
-            { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }
+            { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
+            { test: /\.vue$/, loader: 'vue-loader' }
         ]
     }
 }
